@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://ikimg766hene"]
+
+[ext_resource type="Texture2D" uid="uid://dh6hbrkr85pnp" path="res://Textures/Drone.png" id="1_2ua66"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovkop"]
+atlas = ExtResource("1_2ua66")
+region = Rect2(0, 0, 20, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gaj5x"]
+atlas = ExtResource("1_2ua66")
+region = Rect2(0, 8, 20, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oya7a"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ovkop")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_gaj5x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Drone" type="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(-218.562, 502.625)
+scale = Vector2(5.40625, 5.40625)
+sprite_frames = SubResource("SpriteFrames_oya7a")
+autoplay = "default"
+frame_progress = 0.785542

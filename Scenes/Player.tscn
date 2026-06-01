@@ -1,0 +1,101 @@
+[gd_scene load_steps=14 format=3 uid="uid://bnc3fdydcue3j"]
+
+[ext_resource type="Script" path="res://Scripts/Neuro.gd" id="1_u1grk"]
+[ext_resource type="AudioStream" uid="uid://bbpm36y7t2a55" path="res://Audio/wolfy_sanic-jump-15984.mp3" id="2_bjhnt"]
+[ext_resource type="AudioStream" uid="uid://c8ne8aoy026" path="res://Audio/u_b32baquv5u-8-bit-explosion-10-340462.mp3" id="3_t60yh"]
+[ext_resource type="Texture2D" uid="uid://bbpcppo7byiyt" path="res://Textures/NeuroSprite.png" id="4_6byjc"]
+[ext_resource type="Texture2D" uid="uid://dsb7qxajxdape" path="res://Textures/Speechbubble.png" id="5_71ks2"]
+[ext_resource type="Texture2D" uid="uid://cx78ybnyhjgxa" path="res://Textures/Glow.png" id="6_p155w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_piyuj"]
+atlas = ExtResource("4_6byjc")
+region = Rect2(30, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqcxw"]
+atlas = ExtResource("4_6byjc")
+region = Rect2(0, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejk5y"]
+atlas = ExtResource("4_6byjc")
+region = Rect2(15, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v26le"]
+atlas = ExtResource("4_6byjc")
+region = Rect2(45, 0, 15, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nfcnu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_piyuj")
+}],
+"loop": false,
+"name": &"Charge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_qqcxw")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_ejk5y")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v26le")
+}],
+"loop": false,
+"name": &"Jump",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i17xn"]
+size = Vector2(40, 80)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8om8s"]
+blend_mode = 1
+
+[node name="Neuro" type="CharacterBody2D"]
+position = Vector2(0, -40)
+collision_layer = 2
+script = ExtResource("1_u1grk")
+jumpSFX = ExtResource("2_bjhnt")
+landSFX = ExtResource("3_t60yh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(5.75, -2.75)
+scale = Vector2(5.7, 5.7)
+sprite_frames = SubResource("SpriteFrames_nfcnu")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i17xn")
+
+[node name="SpeechBubble" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-29, -77)
+scale = Vector2(2.87785, 2.87785)
+texture = ExtResource("5_71ks2")
+
+[node name="Label" type="Label" parent="SpeechBubble"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -17.7216
+offset_top = -14.2467
+offset_right = 19.2784
+offset_bottom = 11.7533
+theme_override_font_sizes/font_size = 15
+text = "frick"
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.156863)
+show_behind_parent = true
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_8om8s")
+scale = Vector2(8, 8)
+texture = ExtResource("6_p155w")
